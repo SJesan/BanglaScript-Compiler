@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BanglaScript Compiler | University Project</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f4f7fc;
+            min-height: 100vh;
+            color: #4a5568;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.4rem;
+            opacity: 0.8;
+            margin-bottom: 10px;
+            color: #5a67d8;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #718096;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .code-section {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #4a5568;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .code-editor {
+            width: 100%;
+            height: 400px;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 20px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 16px;
+            resize: vertical;
+            background: #1a202c;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+
+        .code-editor:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(72, 187, 120, 0.4);
+        }
+
+        .results-section {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            max-height: 800px;
+            overflow-y: auto;
+        }
+
+        .phase {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            background: #f7fafc;
+            transition: all 0.3s ease;
+        }
+
+        .phase:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .phase-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #4a5568;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+        }
+
+        .phase-content {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 2px solid #e2e8f0;
+            line-height: 1.4;
+        }
+
+        .phase.success {
+            border-left-color: #48bb78;
+            background: #f0fff4;
+        }
+
+        .phase.error {
+            border-left-color: #f56565;
+            background: #fff5f5;
+        }
+
+        .phase.info {
+            border-left-color: #4299e1;
+            background: #ebf8ff;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .example-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .example-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+
+        .example-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #4a5568;
+            font-size: 1.1rem;
+        }
+
+        .example-code {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+
+        .keywords {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        .keywords-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .keyword-item {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .keyword-item:hover {
+            transform: translateX(5px);
+            background: #edf2f7;
+        }
+
+        .keyword-banglish {
+            font-weight: bold;
+            color: #4a5568;
+            font-size: 1.1rem;
+        }
+
+        .keyword-english {
+            color: #718096;
+            font-size: 0.95rem;
+            margin-top: 5px;
+        }
+
+        .status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 20px 25px;
+            border-radius: 15px;
+            color: white;
+            font-weight: bold;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .status.show {
+            transform: translateX(0);
+        }
+
+        .status.success {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+        }
+
+        .status.error {
+            background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
+        }
+
+        .project-info {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .info-item {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-title {
+            font-weight: bold;
+            color: #4a5568;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .info-content {
+            color: #718096;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 1200px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .btn {
+                justify-content: center;
+            }
+        }
+
+        .syntax-highlight {
+            color: #2d3748;
+        }
+
+        .syntax-keyword {
+            color: #805ad5;
+            font-weight: bold;
+        }
+
+        .syntax-string {
+            color: #38a169;
+        }
+
+        .syntax-number {
+            color: #d69e2e;
+        }
+
+        .syntax-operator {
+            color: #e53e3e;
+        }
+
+        .phase.success > .phase-title {
+            padding: 15px 20px;
+            font-size: 1.3rem;
+        }
+
+        .compact-summary {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 15px;
+            background: #f0fff4;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            justify-content: space-around;
+        }
+
+        .summary-item {
+            font-size: 0.9rem;
+            color: #2f855a;
+        }
+
+        .generated-code {
+             background: #1a202c;
+             color: #e2e8f0;
+             padding: 15px;
+             border-radius: 8px;
+             margin-top: 10px;
+             font-size: 14px;
+        }
+        .generated-code pre {
+            margin: 10px 0 0 0;
+            white-space: pre-wrap;
+        }
+
+        .source-code {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .source-code strong {
+            color: #9f7aea; /* Vibrant purple from the theme */
+            font-size: 1rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .source-code pre {
+            background: none;
+            padding: 0;
+            color: #e2e8f0;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>BanglaScript Compiler</h1>
+            <p>A Modern Compiler for a Modern Language</p>
+            <p class="subtitle">University Project - Computer Science & Engineering</p>
+        </div>
+
+        <div class="project-info">
+            <div class="section-title">
+                📋 <span>Project Overview</span>
+            </div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-title">🎯 Objective</div>
+                    <div class="info-content">Implement a complete compiler for BanglaScript programming language demonstrating all phases of language compilation from source code to executable JavaScript.</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-title">🔧 Technology Stack</div>
+                    <div class="info-content">Node.js, JavaScript, Express.js, HTML5, CSS3, Modern Web Technologies</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-title">📊 Compiler Phases</div>
+                    <div class="info-content">Lexical Analysis, Parsing, Semantic Analysis, Intermediate Code Generation, Optimization, Code Generation</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-title">🎓 Academic Value</div>
+                    <div class="info-content">Comprehensive understanding of compiler design principles, language processing, and software engineering concepts.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="code-section">
+                <div class="section-title">
+                    <span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        Source Code (BanglaScript)
+                    </span>
+                </div>
+                <textarea id="codeEditor" class="code-editor" placeholder="Write your BanglaScript code here...
+
+Examples:
+dhore x = 10;
+dhore y = 5;
+dhore jogfol = x + y;
+dekhao(jogfol);
+
+jode (x > 5) {
+    dekhao("Greater than 5");
+} onnathay {
+    dekhao("Less than or equal to 5");
+}
+
+jotokkhon (i < 10) {
+    dekhao(i);
+    i = i + 1;
+}">dhore x = 10;
+dhore y = 5;
+dhore jogfol = x + y;
+dekhao(jogfol);</textarea>
+                
+                <div class="controls">
+                    <button id="compileBtn" class="btn btn-primary">
+                        🚀 Compile & Analyze
+                    </button>
+                    <button id="clearBtn" class="btn btn-secondary">
+                        🗑️ Clear
+                    </button>
+                    <button id="runDemoBtn" class="btn btn-success">
+                        🎮 Run Demo
+                    </button>
+                </div>
+
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Compiling your BanglaScript code...</p>
+                    <p style="font-size: 0.9rem; color: #718096; margin-top: 10px;">Analyzing all 6 phases of compilation</p>
+                </div>
+            </div>
+
+            <div class="results-section">
+                <div class="section-title">
+                     <span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8.11 3.99"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+                        Compilation Analysis & Results
+                    </span>
+                     <button id="openWindowBtn" class="btn btn-success" style="display: none; margin-left: auto;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        View Full Analysis
+                    </button>
+                </div>
+                <div id="results">
+                    <div class="phase info">
+                        <div class="phase-title">🎓 Welcome to Your Compiler Project!</div>
+                        <div class="phase-content">
+                            <p>This interface demonstrates a complete compiler implementation with all 6 phases:</p>
+                            <br>
+                            <p>1. <strong>Lexical Analysis</strong> - Token generation</p>
+                            <p>2. <strong>Parsing</strong> - Abstract Syntax Tree (AST)</p>
+                            <p>3. <strong>Semantic Analysis</strong> - Type checking & validation</p>
+                            <p>4. <strong>Intermediate Code</strong> - Three-address code</p>
+                            <p>5. <strong>Optimization</strong> - Code optimization</p>
+                            <p>6. <strong>Code Generation</strong> - Final JavaScript</p>
+                            <br>
+                            <p>Click "Compile & Analyze" to see the complete process!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="examples">
+            <div class="example-card" onclick="loadExample(1)">
+                <div class="example-title">🔢 Basic Variables & Arithmetic</div>
+                <div class="example-code">dhore x = 10;
+dhore y = 5;
+dhore jogfol = x + y;
+dekhao(jogfol);</div>
+            </div>
+            
+            <div class="example-card" onclick="loadExample(2)">
+                <div class="example-title">🔀 Conditional Statements</div>
+                <div class="example-code">dhore boyosh = 18;
+jode (boyosh >= 18) {
+    dekhao("You are adult");
+} onnathay {
+    dekhao("You are minor");
+}</div>
+            </div>
+            
+            <div class="example-card" onclick="loadExample(3)">
+                <div class="example-title">🔄 While Loop</div>
+                <div class="example-code">dhore i = 1;
+jotokkhon (i <= 5) {
+    dekhao(i);
+    i = i + 1;
+}</div>
+            </div>
+            
+            <div class="example-card" onclick="loadExample(4)">
+                <div class="example-title">📝 String & Numbers</div>
+                <div class="example-code">dhore nam = "My Name";
+dhore boyosh = 25;
+dekhao(nam + " " + boyosh);</div>
+            </div>
+
+            <div class="example-card" onclick="loadExample(5)">
+                <div class="example-title">🧮 Complex Arithmetic</div>
+                <div class="example-code">dhore a = 15;
+dhore b = 3;
+dhore c = 2;
+dhore result = a * b / c;
+dekhao(result);</div>
+            </div>
+
+            <div class="example-card" onclick="loadExample(6)">
+                <div class="example-title">🔀 Nested Conditions</div>
+                <div class="example-code">dhore score = 85;
+jode (score >= 90) {
+    dekhao("Grade A");
+} onnathay {
+    jode (score >= 80) {
+        dekhao("Grade B");
+    } onnathay {
+        dekhao("Grade C");
+    }
+}</div>
+            </div>
+
+            <div class="example-card" onclick="loadExample(7)">
+                <div class="example-title">📊 Multiple Variables</div>
+                <div class="example-code">dhore name = "John";
+dhore age = 25;
+dhore city = "Dhaka";
+dekhao("Name: " + name);
+dekhao("Age: " + age);
+dekhao("City: " + city);</div>
+            </div>
+
+            <div class="example-card" onclick="loadExample(8)">
+                <div class="example-title">🎯 Comparison Operators</div>
+                <div class="example-code">dhore x = 10;
+dhore y = 20;
+jode (x < y) {
+    dekhao("x is less than y");
+}
+jode (x != y) {
+    dekhao("x is not equal to y");
+}</div>
+            </div>
+        </div>
+
+        <div class="keywords">
+            <div class="section-title">
+                 <span>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>
+                    BanglaScript Language Keywords
+                </span>
+            </div>
+            <div class="keywords-grid">
+                <div class="keyword-item">
+                    <div class="keyword-banglish">dhore</div>
+                    <div class="keyword-english">Variable declaration (let/var)</div>
+                </div>
+                <div class="keyword-item">
+                    <div class="keyword-banglish">dekhao</div>
+                    <div class="keyword-english">Print/show output</div>
+                </div>
+                <div class="keyword-item">
+                    <div class="keyword-banglish">jode</div>
+                    <div class="keyword-english">If statement</div>
+                </div>
+                <div class="keyword-item">
+                    <div class="keyword-banglish">onnathay</div>
+                    <div class="keyword-english">Else statement</div>
+                </div>
+                <div class="keyword-item">
+                    <div class="keyword-banglish">jotokkhon</div>
+                    <div class="keyword-english">While loop</div>
+                </div>
+                <div class="keyword-item">
+                    <div class="keyword-banglish">function</div>
+                    <div class="keyword-english">Function declaration</div>
+                </div>
+                <div class="keyword-item">
+                    <div class="keyword-banglish">ferot</div>
+                    <div class="keyword-english">Return statement</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="status" class="status"></div>
+
+    <script>
+        const examples = {
+            1: `🔢 Basic Variables & Arithmetic
+dhore x = 10;
+dhore y = 5;
+dhore jogfol = x + y;
+dekhao(jogfol);`,
+            2: `🔀 Conditional Statements
+dhore boyosh = 18;
+jode (boyosh >= 18) {
+    dekhao("You are adult");
+} onnathay {
+    dekhao("You are minor");
+}`,
+            3: `🔄 While Loop
+dhore i = 1;
+jotokkhon (i <= 5) {
+    dekhao(i);
+    i = i + 1;
+}`,
+            4: `📝 String & Numbers
+dhore nam = "My Name";
+dhore boyosh = 25;
+dekhao(nam + " " + boyosh);`,
+            5: `🧮 Complex Arithmetic
+dhore a = 15;
+dhore b = 3;
+dhore c = 2;
+dhore result = a * b / c;
+dekhao(result);`,
+            6: `🔀 Nested Conditions
+dhore score = 85;
+jode (score >= 90) {
+    dekhao("Grade A");
+} onnathay {
+    jode (score >= 80) {
+        dekhao("Grade B");
+    } onnathay {
+        dekhao("Grade C");
+    }
+}`,
+            7: `📊 Multiple Variables
+dhore name = "John";
+dhore age = 25;
+dhore city = "Dhaka";
+dekhao("Name: " + name);
+dekhao("Age: " + age);
+dekhao("City: " + city);`,
+            8: `🎯 Comparison Operators
+dhore x = 10;
+dhore y = 20;
+jode (x < y) {
+    dekhao("x is less than y");
+}
+jode (x != y) {
+    dekhao("x is not equal to y");
+}`
+        };
+
+        function loadExample(exampleNumber) {
+            const code = examples[exampleNumber];
+            if (code) {
+                // Remove the emoji and title from the code
+                const cleanCode = code.split('\n').slice(1).join('\n');
+                document.getElementById('codeEditor').value = cleanCode;
+                showStatus(`Loaded example ${exampleNumber}: ${code.split('\n')[0]}`, 'success');
+            }
+        }
+
+        function showStatus(message, type) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type} show`;
+            setTimeout(() => {
+                status.classList.remove('show');
+            }, 4000);
+        }
+
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('compileBtn').disabled = true;
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('compileBtn').disabled = false;
+        }
+
+        function clearResults() {
+            document.getElementById('results').innerHTML = `
+                <div class="phase info">
+                    <div class="phase-title">🎓 Welcome to Your Compiler Project!</div>
+                    <div class="phase-content">
+                        <p>This interface demonstrates a complete compiler implementation with all 6 phases:</p>
+                        <br>
+                        <p>1. <strong>Lexical Analysis</strong> - Token generation</p>
+                        <p>2. <strong>Parsing</strong> - Abstract Syntax Tree (AST)</p>
+                        <p>3. <strong>Semantic Analysis</strong> - Type checking & validation</p>
+                        <p>4. <strong>Intermediate Code</strong> - Three-address code</p>
+                        <p>5. <strong>Optimization</strong> - Code optimization</p>
+                        <p>6. <strong>Code Generation</strong> - Final JavaScript</p>
+                        <br>
+                        <p>Click "Compile & Analyze" to see the complete process!</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function formatCode(code) {
+            return code.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        function syntaxHighlight(code) {
+            return code
+                .replace(/\b(dhore|dekhao|jode|onnathay|jotokkhon|function|ferot)\b/g, '<span class="syntax-keyword">$1</span>')
+                .replace(/"([^"]*)"/g, '<span class="syntax-string">"$1"</span>')
+                .replace(/\b(\d+)\b/g, '<span class="syntax-number">$1</span>')
+                .replace(/([+\-*/=<>!&|]+)/g, '<span class="syntax-operator">$1</span>');
+        }
+
+        let lastCompilationResult = null; // Store the last compilation result
+
+        function displayResults(result) {
+            const resultsDiv = document.getElementById('results');
+            const openWindowBtn = document.getElementById('openWindowBtn');
+            
+            if (!result || !result.success) {
+                resultsDiv.innerHTML = `
+                    <div class="phase error">
+                        <div class="phase-title">❌ Compilation Failed</div>
+                        <div class="phase-content">
+                            <strong>Error:</strong> ${result ? result.error || 'Unknown error' : 'No result received'}<br><br>
+                            <strong>Please check your BanglaScript syntax:</strong><br>
+                            • Make sure all statements end with semicolons (;)<br>
+                            • Use correct BanglaScript keywords (dhore, dekhao, jode, etc.)<br>
+                            • Check that brackets and parentheses match<br>
+                            • Verify variable names are valid
+                        </div>
+                    </div>
+                `;
+                openWindowBtn.style.display = 'none';
+                lastCompilationResult = null;
+                return;
+            }
+
+            // Store the full result for the new window
+            lastCompilationResult = result;
+
+            // Show compact summary in main page
+            const tokenCount = result.tokens ? result.tokens.length - 1 : 0;
+            const astNodeCount = result.ast ? countASTNodes(result.ast) : 0;
+            const variableCount = result.semanticResult && result.semanticResult.symbolTable ? 
+                (Array.isArray(result.semanticResult.symbolTable.symbols) ? result.semanticResult.symbolTable.symbols.length : 0) : 0;
+            const intermediateCount = result.intermediateCode ? result.intermediateCode.length : 0;
+            const optimizedCount = result.optimizedCode ? result.optimizedCode.length : 0;
+            const generatedLineCount = result.generatedCode ? result.generatedCode.split('\n').length : 0;
+
+            let html = `
+                <div class="phase success">
+                    <div class="phase-title">✅ Compilation Successful</div>
+                    <div class="phase-content">
+                        <div class="compact-summary">
+                            <div class="summary-item">🔍 <strong>Phase 1:</strong> ${tokenCount} Tokens</div>
+                            <div class="summary-item">🌳 <strong>Phase 2:</strong> ${astNodeCount} AST Nodes</div>
+                            <div class="summary-item">🔍 <strong>Phase 3:</strong> ${variableCount} Variables</div>
+                            <div class="summary-item">⚙️ <strong>Phase 4:</strong> ${intermediateCount} Instructions</div>
+                            <div class="summary-item">🚀 <strong>Phase 5:</strong> ${optimizedCount} Optimized</div>
+                            <div class="summary-item">🎯 <strong>Phase 6:</strong> ${generatedLineCount} Lines</div>
+                        </div>
+                        
+                        <div class="generated-code">
+                            <strong>Generated JavaScript:</strong>
+                            <pre>${formatCode(result.generatedCode)}</pre>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            resultsDiv.innerHTML = html;
+            openWindowBtn.style.display = 'inline-flex';
+        }
+
+        function countASTNodes(node) {
+            if (!node) return 0;
+            
+            let count = 1;
+            if (node.statements) {
+                node.statements.forEach(stmt => count += countASTNodes(stmt));
+            }
+            if (node.left) count += countASTNodes(node.left);
+            if (node.right) count += countASTNodes(node.right);
+            if (node.condition) count += countASTNodes(node.condition);
+            if (node.thenBranch) count += countASTNodes(node.thenBranch);
+            if (node.elseBranch) count += countASTNodes(node.elseBranch);
+            if (node.body) count += countASTNodes(node.body);
+            if (node.initializer) count += countASTNodes(node.initializer);
+            if (node.value) count += countASTNodes(node.value);
+            if (node.expression) count += countASTNodes(node.expression);
+            if (node.arguments) {
+                node.arguments.forEach(arg => count += countASTNodes(arg));
+            }
+            
+            return count;
+        }
+
+        async function compileCode() {
+            const sourceCode = document.getElementById('codeEditor').value.trim();
+            
+            if (!sourceCode) {
+                showStatus('Please enter some BanglaScript code to compile', 'error');
+                return;
+            }
+
+            showLoading();
+            clearResults();
+
+            try {
+                // Make API call to the Node.js server
+                const response = await fetch('/api/compile', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ sourceCode })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data.success) {
+                    displayResults(data.result);
+                    showStatus('Compilation completed successfully!', 'success');
+                } else {
+                    displayResults(data.result || { success: false, error: data.error });
+                    showStatus('Compilation failed: ' + (data.error || 'Unknown error'), 'error');
+                }
+
+            } catch (error) {
+                console.error('Compilation error:', error);
+                displayResults({ 
+                    success: false, 
+                    error: 'Network error: ' + error.message,
+                    tokens: [],
+                    ast: null,
+                    semanticResult: { isValid: false, symbolTable: { symbols: new Map() } },
+                    intermediateCode: [],
+                    optimizedCode: [],
+                    generatedCode: ''
+                });
+                showStatus('Network error: ' + error.message, 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function runDemo() {
+            const demoCode = `dhore x = 10;
+dhore y = 5;
+dhore jogfol = x + y;
+dekhao("Demo Result: " + jogfol);
+
+jode (jogfol > 10) {
+    dekhao("Greater than 10");
+} onnathay {
+    dekhao("Less than or equal to 10");
+}`;
+
+            document.getElementById('codeEditor').value = demoCode;
+            await compileCode();
+        }
+
+        function openDetailedResults() {
+            if (!lastCompilationResult) {
+                showStatus('No compilation results to display', 'error');
+                return;
+            }
+
+            // Create detailed results HTML
+            const detailedHTML = createDetailedResultsHTML(lastCompilationResult);
+            
+            // Open new tab with detailed results
+            const newWindow = window.open('', '_blank');
+            newWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>🚀 BanglaScript Compiler - Detailed Analysis</title>
+                    <style>
+                        * {
+                            margin: 0;
+                            padding: 0;
+                            box-sizing: border-box;
+                        }
+                        
+                        body {
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                            min-height: 100vh;
+                            color: #333;
+                            line-height: 1.6;
+                            padding: 20px;
+                        }
+                        
+                        .container {
+                            max-width: 1400px;
+                            margin: 0 auto;
+                            background: white;
+                            border-radius: 20px;
+                            padding: 30px;
+                            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+                        }
+                        
+                        .header {
+                            text-align: center;
+                            margin-bottom: 30px;
+                            color: #4a5568;
+                        }
+                        
+                        .header h1 {
+                            font-size: 2.5rem;
+                            margin-bottom: 10px;
+                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;
+                            background-clip: text;
+                        }
+                        
+                        .phase {
+                            margin-bottom: 25px;
+                            padding: 20px;
+                            border-radius: 15px;
+                            border-left: 5px solid #667eea;
+                            background: #f7fafc;
+                            transition: all 0.3s ease;
+                        }
+                        
+                        .phase:hover {
+                            transform: translateX(5px);
+                            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                        }
+                        
+                        .phase-title {
+                            font-weight: bold;
+                            margin-bottom: 15px;
+                            color: #4a5568;
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            font-size: 1.2rem;
+                        }
+                        
+                        .phase-content {
+                            background: white;
+                            padding: 15px;
+                            border-radius: 10px;
+                            font-family: 'Courier New', monospace;
+                            font-size: 13px;
+                            max-height: 400px;
+                            overflow-y: auto;
+                            border: 2px solid #e2e8f0;
+                            line-height: 1.4;
+                        }
+                        
+                        .phase.success {
+                            border-left-color: #48bb78;
+                            background: #f0fff4;
+                        }
+                        
+                        .phase.error {
+                            border-left-color: #f56565;
+                            background: #fff5f5;
+                        }
+                        
+                        pre {
+                            background: #f7fafc;
+                            padding: 10px;
+                            border-radius: 5px;
+                            margin: 10px 0;
+                            white-space: pre-wrap;
+                            overflow-x: auto;
+                        }
+                        
+                        .source-code {
+                            background: #1a202c;
+                            color: #e2e8f0;
+                            padding: 20px;
+                            border-radius: 12px;
+                            margin: 10px 0;
+                            font-size: 14px;
+                        }
+
+                        .source-code strong {
+                            color: #9f7aea; /* Vibrant purple from the theme */
+                            font-size: 1rem;
+                            display: block;
+                            margin-bottom: 10px;
+                        }
+
+                        .source-code pre {
+                            background: none;
+                            padding: 0;
+                            color: #e2e8f0;
+                            white-space: pre-wrap;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <div class="header">
+                            <h1>🚀 BanglaScript Compiler - Detailed Analysis</h1>
+                            <p>Complete compilation process with all 6 phases</p>
+                        </div>
+                        ${detailedHTML}
+                    </div>
+                </body>
+                </html>
+            `);
+            newWindow.document.close();
+        }
+
+        function createDetailedResultsHTML(result) {
+            let html = `
+                <div class="phase success">
+                    <div class="phase-title">📝 Source Code</div>
+                    <div class="phase-content">
+                        <div class="source-code">
+                            <strong>BanglaScript Code:</strong>
+                            <pre>${formatCode(result.sourceCode)}</pre>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Phase 1: Lexical Analysis
+            if (result.tokens && result.tokens.length > 0) {
+                html += `
+                    <div class="phase success">
+                        <div class="phase-title">🔍 Phase 1: Lexical Analysis</div>
+                        <div class="phase-content">
+                            <strong>Tokens Generated:</strong> ${result.tokens.length - 1}<br>
+                            <strong>Status:</strong> ✅ Success<br><br>
+                            <strong>Token List:</strong><br>
+                            <pre>${formatCode(JSON.stringify(result.tokens, null, 2))}</pre>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Phase 2: Parsing
+            if (result.ast) {
+                html += `
+                    <div class="phase success">
+                        <div class="phase-title">🌳 Phase 2: Parsing (AST)</div>
+                        <div class="phase-content">
+                            <strong>AST Nodes:</strong> ${countASTNodes(result.ast)}<br>
+                            <strong>Status:</strong> ✅ Success<br><br>
+                            <strong>Abstract Syntax Tree:</strong><br>
+                            <pre>${formatCode(JSON.stringify(result.ast, null, 2))}</pre>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Phase 3: Semantic Analysis
+            if (result.semanticResult) {
+                let symbolEntries = [];
+                if (Array.isArray(result.semanticResult.symbolTable.symbols)) {
+                    symbolEntries = result.semanticResult.symbolTable.symbols;
+                } else if (result.semanticResult.symbolTable.symbols && typeof result.semanticResult.symbolTable.symbols === 'object') {
+                    symbolEntries = Object.entries(result.semanticResult.symbolTable.symbols);
+                }
+                const symbolCount = symbolEntries.length;
+                
+                html += `
+                    <div class="phase ${result.semanticResult.isValid ? 'success' : 'error'}">
+                        <div class="phase-title">🔍 Phase 3: Semantic Analysis</div>
+                        <div class="phase-content">
+                            <strong>Variables Declared:</strong> ${symbolCount}<br>
+                            <strong>Status:</strong> ${result.semanticResult.isValid ? '✅ Valid' : '❌ Invalid'}<br><br>
+                            <strong>Symbol Table:</strong><br>
+                            <pre>${formatCode(JSON.stringify(symbolEntries, null, 2))}</pre>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Phase 4: Intermediate Code
+            if (result.intermediateCode && result.intermediateCode.length > 0) {
+                html += `
+                    <div class="phase success">
+                        <div class="phase-title">⚙️ Phase 4: Intermediate Code Generation</div>
+                        <div class="phase-content">
+                            <strong>Instructions:</strong> ${result.intermediateCode.length}<br>
+                            <strong>Status:</strong> ✅ Success<br><br>
+                            <strong>Intermediate Code:</strong><br>
+                            <pre>${formatCode(JSON.stringify(result.intermediateCode, null, 2))}</pre>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Phase 5: Optimization
+            if (result.optimizedCode && result.optimizedCode.length >= 0) {
+                const originalCount = result.intermediateCode ? result.intermediateCode.length : 0;
+                const optimizedCount = result.optimizedCode.length;
+                const savings = originalCount - optimizedCount;
+                
+                html += `
+                    <div class="phase success">
+                        <div class="phase-title">🚀 Phase 5: Code Optimization</div>
+                        <div class="phase-content">
+                            <strong>Original Instructions:</strong> ${originalCount}<br>
+                            <strong>Optimized Instructions:</strong> ${optimizedCount}<br>
+                            <strong>Optimization Savings:</strong> ${savings}<br>
+                            <strong>Status:</strong> ✅ Success<br><br>
+                            <strong>Optimized Code:</strong><br>
+                            <pre>${formatCode(JSON.stringify(result.optimizedCode, null, 2))}</pre>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Phase 6: Code Generation
+            if (result.generatedCode) {
+                html += `
+                    <div class="phase success">
+                        <div class="phase-title">🎯 Phase 6: Code Generation</div>
+                        <div class="phase-content">
+                            <strong>Generated JavaScript:</strong><br>
+                            <div class="source-code">
+                                <pre>${formatCode(result.generatedCode)}</pre>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Summary
+            const tokenCount = result.tokens ? result.tokens.length - 1 : 0;
+            const astNodeCount = result.ast ? countASTNodes(result.ast) : 0;
+            const variableCount = result.semanticResult && result.semanticResult.symbolTable ? 
+                (Array.isArray(result.semanticResult.symbolTable.symbols) ? result.semanticResult.symbolTable.symbols.length : 0) : 0;
+            const intermediateCount = result.intermediateCode ? result.intermediateCode.length : 0;
+            const optimizedCount = result.optimizedCode ? result.optimizedCode.length : 0;
+            const generatedLineCount = result.generatedCode ? result.generatedCode.split('\n').length : 0;
+            
+            html += `
+                <div class="phase success">
+                    <div class="phase-title">📊 Compilation Summary</div>
+                    <div class="phase-content">
+                        <strong>✅ Compilation completed successfully!</strong><br>
+                        <strong>📁 Output:</strong> JavaScript code ready for execution<br>
+                        <strong>📈 Statistics:</strong><br>
+                        • Tokens generated: ${tokenCount}<br>
+                        • AST nodes: ${astNodeCount}<br>
+                        • Variables declared: ${variableCount}<br>
+                        • Intermediate instructions: ${intermediateCount}<br>
+                        • Optimized instructions: ${optimizedCount}<br>
+                        • Generated code lines: ${generatedLineCount}
+                        <br><br>
+                        <strong>🎓 University Project Achievement:</strong><br>
+                        This demonstrates a complete understanding of compiler design principles, 
+                        language processing, and software engineering concepts.
+                    </div>
+                </div>
+            `;
+
+            return html;
+        }
+
+        // Event listeners
+        document.getElementById('compileBtn').addEventListener('click', compileCode);
+        document.getElementById('openWindowBtn').addEventListener('click', openDetailedResults);
+        document.getElementById('clearBtn').addEventListener('click', () => {
+            document.getElementById('codeEditor').value = '';
+            clearResults();
+            document.getElementById('openWindowBtn').style.display = 'none';
+        });
+        document.getElementById('runDemoBtn').addEventListener('click', runDemo);
+
+        // Allow Enter key to compile (Ctrl+Enter)
+        document.getElementById('codeEditor').addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'Enter') {
+                compileCode();
+            }
+        });
+    </script>
+</body>
+</html>

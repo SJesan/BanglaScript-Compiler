@@ -1,0 +1,19 @@
+{
+  "name": "banglascript-compiler",
+  "version": "1.0.0",
+  "description": "A complete BanglaScript programming language compiler demonstrating all phases of language compilation",
+  "main": "src/compiler.js",
+  "scripts": {
+    "start": "node src/compiler.js",
+    "test": "node test_banglascript.js",
+    "demo": "node src/demo.js",
+    "web": "node server.js"
+  },
+  "keywords": ["compiler", "programming-language", "banglascript", "lexical-analysis", "parsing", "code-generation"],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "express": "^4.18.2"
+  }
+} 
