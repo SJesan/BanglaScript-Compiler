@@ -178,7 +178,10 @@ class Parser {
     }
 
     parseVariableDeclaration() {
-        this.match('DHORE');
+        if (this.currentToken().type !== 'DHORE') {
+            throw new Error(`Expected 'dhori' keyword, got ${this.currentToken().value}`);
+        }
+        this.advance();
         const name = this.match('IDENTIFIER').value;
         this.match('ASSIGN');
         const initializer = this.parseExpression();
@@ -195,7 +198,10 @@ class Parser {
     }
 
     parseIfStatement() {
-        this.match('JODE');
+        if (this.currentToken().type !== 'JODE') {
+            throw new Error(`Expected 'jodi' keyword, got ${this.currentToken().value}`);
+        }
+        this.advance();
         this.match('LPAREN');
         const condition = this.parseExpression();
         this.match('RPAREN');
@@ -203,7 +209,7 @@ class Parser {
         
         let elseBranch = null;
         if (this.currentToken().type === 'ONNATHAY') {
-            this.match('ONNATHAY');
+            this.advance();
             elseBranch = this.parseBlockStatement();
         }
         

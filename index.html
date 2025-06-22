@@ -521,23 +521,23 @@
                 <textarea id="codeEditor" class="code-editor" placeholder="Write your BanglaScript code here...
 
 Examples:
-dhore x = 10;
-dhore y = 5;
-dhore jogfol = x + y;
+dhori x = 10;
+dhori y = 5;
+dhori jogfol = x + y;
 dekhao(jogfol);
 
-jode (x > 5) {
+jodi (x > 5) {
     dekhao("Greater than 5");
-} onnathay {
+} othoba {
     dekhao("Less than or equal to 5");
 }
 
 jotokkhon (i < 10) {
     dekhao(i);
     i = i + 1;
-}">dhore x = 10;
-dhore y = 5;
-dhore jogfol = x + y;
+}">dhori x = 10;
+dhori y = 5;
+dhori jogfol = x + y;
 dekhao(jogfol);</textarea>
                 
                 <div class="controls">
@@ -593,25 +593,25 @@ dekhao(jogfol);</textarea>
         <div class="examples">
             <div class="example-card" onclick="loadExample(1)">
                 <div class="example-title">🔢 Basic Variables & Arithmetic</div>
-                <div class="example-code">dhore x = 10;
-dhore y = 5;
-dhore jogfol = x + y;
+                <div class="example-code">dhori x = 10;
+dhori y = 5;
+dhori jogfol = x + y;
 dekhao(jogfol);</div>
             </div>
             
             <div class="example-card" onclick="loadExample(2)">
                 <div class="example-title">🔀 Conditional Statements</div>
-                <div class="example-code">dhore boyosh = 18;
-jode (boyosh >= 18) {
+                <div class="example-code">dhori boyosh = 18;
+jodi (boyosh >= 18) {
     dekhao("You are adult");
-} onnathay {
+} othoba {
     dekhao("You are minor");
 }</div>
             </div>
             
             <div class="example-card" onclick="loadExample(3)">
                 <div class="example-title">🔄 While Loop</div>
-                <div class="example-code">dhore i = 1;
+                <div class="example-code">dhori i = 1;
 jotokkhon (i <= 5) {
     dekhao(i);
     i = i + 1;
@@ -620,29 +620,29 @@ jotokkhon (i <= 5) {
             
             <div class="example-card" onclick="loadExample(4)">
                 <div class="example-title">📝 String & Numbers</div>
-                <div class="example-code">dhore nam = "My Name";
-dhore boyosh = 25;
+                <div class="example-code">dhori nam = "My Name";
+dhori boyosh = 25;
 dekhao(nam + " " + boyosh);</div>
             </div>
 
             <div class="example-card" onclick="loadExample(5)">
                 <div class="example-title">🧮 Complex Arithmetic</div>
-                <div class="example-code">dhore a = 15;
-dhore b = 3;
-dhore c = 2;
-dhore result = a * b / c;
+                <div class="example-code">dhori a = 15;
+dhori b = 3;
+dhori c = 2;
+dhori result = a * b / c;
 dekhao(result);</div>
             </div>
 
             <div class="example-card" onclick="loadExample(6)">
                 <div class="example-title">🔀 Nested Conditions</div>
-                <div class="example-code">dhore score = 85;
-jode (score >= 90) {
+                <div class="example-code">dhori score = 85;
+jodi (score >= 90) {
     dekhao("Grade A");
-} onnathay {
-    jode (score >= 80) {
+} othoba {
+    jodi (score >= 80) {
         dekhao("Grade B");
-    } onnathay {
+    } othoba {
         dekhao("Grade C");
     }
 }</div>
@@ -650,9 +650,9 @@ jode (score >= 90) {
 
             <div class="example-card" onclick="loadExample(7)">
                 <div class="example-title">📊 Multiple Variables</div>
-                <div class="example-code">dhore name = "John";
-dhore age = 25;
-dhore city = "Dhaka";
+                <div class="example-code">dhori name = "John";
+dhori age = 25;
+dhori city = "Dhaka";
 dekhao("Name: " + name);
 dekhao("Age: " + age);
 dekhao("City: " + city);</div>
@@ -660,12 +660,12 @@ dekhao("City: " + city);</div>
 
             <div class="example-card" onclick="loadExample(8)">
                 <div class="example-title">🎯 Comparison Operators</div>
-                <div class="example-code">dhore x = 10;
-dhore y = 20;
-jode (x < y) {
+                <div class="example-code">dhori x = 10;
+dhori y = 20;
+jodi (x < y) {
     dekhao("x is less than y");
 }
-jode (x != y) {
+jodi (x != y) {
     dekhao("x is not equal to y");
 }</div>
             </div>
@@ -680,7 +680,7 @@ jode (x != y) {
             </div>
             <div class="keywords-grid">
                 <div class="keyword-item">
-                    <div class="keyword-banglish">dhore</div>
+                    <div class="keyword-banglish">dhori</div>
                     <div class="keyword-english">Variable declaration (let/var)</div>
                 </div>
                 <div class="keyword-item">
@@ -688,11 +688,11 @@ jode (x != y) {
                     <div class="keyword-english">Print/show output</div>
                 </div>
                 <div class="keyword-item">
-                    <div class="keyword-banglish">jode</div>
+                    <div class="keyword-banglish">jodi</div>
                     <div class="keyword-english">If statement</div>
                 </div>
                 <div class="keyword-item">
-                    <div class="keyword-banglish">onnathay</div>
+                    <div class="keyword-banglish">othoba</div>
                     <div class="keyword-english">Else statement</div>
                 </div>
                 <div class="keyword-item">
@@ -716,58 +716,58 @@ jode (x != y) {
     <script>
         const examples = {
             1: `🔢 Basic Variables & Arithmetic
-dhore x = 10;
-dhore y = 5;
-dhore jogfol = x + y;
+dhori x = 10;
+dhori y = 5;
+dhori jogfol = x + y;
 dekhao(jogfol);`,
             2: `🔀 Conditional Statements
-dhore boyosh = 18;
-jode (boyosh >= 18) {
+dhori boyosh = 18;
+jodi (boyosh >= 18) {
     dekhao("You are adult");
-} onnathay {
+} othoba {
     dekhao("You are minor");
 }`,
             3: `🔄 While Loop
-dhore i = 1;
+dhori i = 1;
 jotokkhon (i <= 5) {
     dekhao(i);
     i = i + 1;
 }`,
             4: `📝 String & Numbers
-dhore nam = "My Name";
-dhore boyosh = 25;
+dhori nam = "My Name";
+dhori boyosh = 25;
 dekhao(nam + " " + boyosh);`,
             5: `🧮 Complex Arithmetic
-dhore a = 15;
-dhore b = 3;
-dhore c = 2;
-dhore result = a * b / c;
+dhori a = 15;
+dhori b = 3;
+dhori c = 2;
+dhori result = a * b / c;
 dekhao(result);`,
             6: `🔀 Nested Conditions
-dhore score = 85;
-jode (score >= 90) {
+dhori score = 85;
+jodi (score >= 90) {
     dekhao("Grade A");
-} onnathay {
-    jode (score >= 80) {
+} othoba {
+    jodi (score >= 80) {
         dekhao("Grade B");
-    } onnathay {
+    } othoba {
         dekhao("Grade C");
     }
 }`,
             7: `📊 Multiple Variables
-dhore name = "John";
-dhore age = 25;
-dhore city = "Dhaka";
+dhori name = "John";
+dhori age = 25;
+dhori city = "Dhaka";
 dekhao("Name: " + name);
 dekhao("Age: " + age);
 dekhao("City: " + city);`,
             8: `🎯 Comparison Operators
-dhore x = 10;
-dhore y = 20;
-jode (x < y) {
+dhori x = 10;
+dhori y = 20;
+jodi (x < y) {
     dekhao("x is less than y");
 }
-jode (x != y) {
+jodi (x != y) {
     dekhao("x is not equal to y");
 }`
         };
@@ -827,7 +827,7 @@ jode (x != y) {
 
         function syntaxHighlight(code) {
             return code
-                .replace(/\b(dhore|dekhao|jode|onnathay|jotokkhon|function|ferot)\b/g, '<span class="syntax-keyword">$1</span>')
+                .replace(/\b(dhori|dekhao|jodi|othoba|jotokkhon|function|ferot)\b/g, '<span class="syntax-keyword">$1</span>')
                 .replace(/"([^"]*)"/g, '<span class="syntax-string">"$1"</span>')
                 .replace(/\b(\d+)\b/g, '<span class="syntax-number">$1</span>')
                 .replace(/([+\-*/=<>!&|]+)/g, '<span class="syntax-operator">$1</span>');
@@ -847,7 +847,7 @@ jode (x != y) {
                             <strong>Error:</strong> ${result ? result.error || 'Unknown error' : 'No result received'}<br><br>
                             <strong>Please check your BanglaScript syntax:</strong><br>
                             • Make sure all statements end with semicolons (;)<br>
-                            • Use correct BanglaScript keywords (dhore, dekhao, jode, etc.)<br>
+                            • Use correct BanglaScript keywords (dhori, dekhao, jodi, etc.)<br>
                             • Check that brackets and parentheses match<br>
                             • Verify variable names are valid
                         </div>
@@ -972,14 +972,14 @@ jode (x != y) {
         }
 
         async function runDemo() {
-            const demoCode = `dhore x = 10;
-dhore y = 5;
-dhore jogfol = x + y;
+            const demoCode = `dhori x = 10;
+dhori y = 5;
+dhori jogfol = x + y;
 dekhao("Demo Result: " + jogfol);
 
-jode (jogfol > 10) {
+jodi (jogfol > 10) {
     dekhao("Greater than 10");
-} onnathay {
+} othoba {
     dekhao("Less than or equal to 10");
 }`;
 

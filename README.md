@@ -35,10 +35,10 @@ BanglaScript is a programming language that uses English-based keywords inspired
 
 | BanglaScript | English Equivalent | Example Usage |
 |--------------|--------------------|-------------------------|
-| `dhore`      | `let` / `var`      | `dhore x = 10;`         |
+| `dhori`      | `let` / `var`      | `dhori x = 10;`         |
 | `dekhao`     | `print` / `log`    | `dekhao("Hello");`      |
-| `jode`       | `if`               | `jode (x > 5) { ... }`  |
-| `onnathay`   | `else`             | `} onnathay { ... }`    |
+| `jodi`       | `if`               | `jodi (x > 5) { ... }`  |
+| `othoba`     | `else`             | `} othoba { ... }`      |
 | `jotokkhon`  | `while`            | `jotokkhon (i < 10) { ... }` |
 | `function`   | `function`         | `function add(a, b) { ... }` |
 | `ferot`      | `return`           | `ferot a + b;`          |
@@ -47,18 +47,18 @@ BanglaScript is a programming language that uses English-based keywords inspired
 
 #### Basic Variables & Arithmetic
 ```banglascript
-dhore x = 10;
-dhore y = 5;
-dhore jogfol = x + y;
+dhori x = 10;
+dhori y = 5;
+dhori jogfol = x + y;
 dekhao(jogfol);
 ```
 
 #### Conditional Statements
 ```banglascript
-dhore boyosh = 18;
-jode (boyosh >= 18) {
+dhori boyosh = 18;
+jodi (boyosh >= 18) {
     dekhao("You are an adult");
-} onnathay {
+} othoba {
     dekhao("You are a minor");
 }
 ```

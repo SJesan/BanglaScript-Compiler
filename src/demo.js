@@ -4,23 +4,23 @@ const chalk = require('chalk');
 // Banglish language examples
 const examples = {
     'Simple Banglish Variables': `
-dhore x = 10;
-dhore y = 5;
-dhore jogfol = x + y;
+dhori x = 10;
+dhori y = 5;
+dhori jogfol = x + y;
 dekhao(jogfol);
 `,
 
     'Banglish Conditional': `
-dhore boyosh = 18;
-jode (boyosh >= 18) {
+dhori boyosh = 18;
+jodi (boyosh >= 18) {
     dekhao("You are adult");
-} onnathay {
+} othoba {
     dekhao("You are minor");
 }
 `,
 
     'Banglish Loop': `
-dhore i = 1;
+dhori i = 1;
 jotokkhon (i <= 5) {
     dekhao(i);
     i = i + 1;
@@ -31,14 +31,14 @@ jotokkhon (i <= 5) {
 function jog(a, b) {
     ferot a + b;
 }
-dhore fol = jog(10, 20);
+dhori fol = jog(10, 20);
 dekhao(fol);
 `,
 
     'Simple Math': `
-dhore a = 15;
-dhore b = 3;
-dhore gunfol = a * b;
+dhori a = 15;
+dhori b = 3;
+dhori gunfol = a * b;
 dekhao("Result: " + gunfol);
 `
 };

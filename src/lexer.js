@@ -65,9 +65,9 @@ class Lexer {
 
     // Banglish Keywords mapping
     static KEYWORDS = {
-        'dhore': Lexer.TOKEN_TYPES.DHORE,
-        'jode': Lexer.TOKEN_TYPES.JODE,
-        'onnathay': Lexer.TOKEN_TYPES.ONNATHAY,
+        'dhori': Lexer.TOKEN_TYPES.DHORE,
+        'jodi': Lexer.TOKEN_TYPES.JODE,
+        'othoba': Lexer.TOKEN_TYPES.ONNATHAY,
         'jotokkhon': Lexer.TOKEN_TYPES.JOTOKKHON,
         'function': Lexer.TOKEN_TYPES.FUNCTION,
         'ferot': Lexer.TOKEN_TYPES.FEROT,

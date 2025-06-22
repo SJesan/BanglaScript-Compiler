@@ -57,6 +57,30 @@ If you want to run the automated tests directly from your terminal, you can use 
 
 ---
 
+### 🔤 Example BanglaScript Code
+
+Try these examples in the web interface:
+
+**Basic Variables:**
+```banglascript
+dhori x = 10;
+dhori y = 5;
+dhori jogfol = x + y;
+dekhao(jogfol);
+```
+
+**Conditional Statements:**
+```banglascript
+dhori boyosh = 18;
+jodi (boyosh >= 18) {
+    dekhao("You are an adult");
+} othoba {
+    dekhao("You are a minor");
+}
+```
+
+---
+
 ###  Troubleshooting
 
 -   **`EADDRINUSE` Error**: If you see an error that the address is already in use, it means another application (or a previous instance of this server) is already running on port `3001`. Stop the other process and try again.

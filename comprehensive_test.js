@@ -10,7 +10,7 @@ const compiler = new Compiler();
 const testCases = [
     {
         name: "Basic Variable Declaration",
-        code: `dhore x = 10;`,
+        code: `dhori x = 10;`,
         shouldPass: true
     },
     {
@@ -20,17 +20,17 @@ const testCases = [
     },
     {
         name: "Basic Arithmetic",
-        code: `dhore x = 5 + 3;`,
+        code: `dhori x = 5 + 3;`,
         shouldPass: true
     },
     {
         name: "Variable Assignment",
-        code: `dhore x = 10; x = 20;`,
+        code: `dhori x = 10; x = 20;`,
         shouldPass: true
     },
     {
         name: "Simple If Statement",
-        code: `jode (true) { dekhao("Yes"); }`,
+        code: `jodi (true) { dekhao("Yes"); }`,
         shouldPass: true
     },
     {
@@ -40,7 +40,7 @@ const testCases = [
     },
     {
         name: "Banglish Identifiers",
-        code: `dhore jogfol = 10; dekhao(jogfol);`,
+        code: `dhori jogfol = 10; dekhao(jogfol);`,
         shouldPass: true
     },
     {
@@ -100,10 +100,10 @@ if (passedTests === totalTests) {
 }
 
 console.log(chalk.cyan('\n🔤 Your Banglish language supports:'));
-console.log(chalk.cyan('  • Variable declarations (dhore)'));
+console.log(chalk.cyan('  • Variable declarations (dhori)'));
 console.log(chalk.cyan('  • Print statements (dekhao)'));
 console.log(chalk.cyan('  • Arithmetic operations (+, -, *, /)'));
-console.log(chalk.cyan('  • Control structures (jode, jotokkhon)'));
+console.log(chalk.cyan('  • Control structures (jodi, jotokkhon)'));
 console.log(chalk.cyan('  • Banglish identifiers'));
 console.log(chalk.cyan('  • String literals'));
 

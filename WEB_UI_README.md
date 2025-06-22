@@ -51,6 +51,37 @@ This document provides a comprehensive overview of the **BanglaScript Compiler W
 
 ---
 
+## 🔤 BanglaScript Language Examples
+
+### Basic Variables
+```banglascript
+dhori x = 10;
+dhori y = 5;
+dhori jogfol = x + y;
+dekhao(jogfol);
+```
+
+### Conditional Statements
+```banglascript
+dhori boyosh = 18;
+jodi (boyosh >= 18) {
+    dekhao("You are an adult");
+} othoba {
+    dekhao("You are a minor");
+}
+```
+
+### Loops
+```banglascript
+dhori i = 1;
+jotokkhon (i <= 5) {
+    dekhao(i);
+    i = i + 1;
+}
+```
+
+---
+
 ## 🎨 Design & Technology
 
 - **Frontend**: Built with pure HTML, CSS, and JavaScript for simplicity and performance.
