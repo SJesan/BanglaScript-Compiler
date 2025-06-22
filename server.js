@@ -3,7 +3,7 @@ const path = require('path');
 const { Compiler } = require('./src/compiler');
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 // Middleware to parse JSON
 app.use(express.json());
@@ -102,8 +102,14 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'OK', message: 'BanglaScript Compiler API is running' });
 });
 
-app.listen(PORT, () => {
-    console.log(`🚀 BanglaScript Compiler Web UI is running on http://localhost:${PORT}`);
-    console.log(`📝 API endpoint: http://localhost:${PORT}/api/compile`);
-    console.log(`🔍 Health check: http://localhost:${PORT}/api/health`);
-}); 
+// Only start the server if this file is run directly (not imported)
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`🚀 BanglaScript Compiler Web UI is running on http://localhost:${PORT}`);
+        console.log(`📝 API endpoint: http://localhost:${PORT}/api/compile`);
+        console.log(`🔍 Health check: http://localhost:${PORT}/api/health`);
+    });
+}
+
+// Export the app for Vercel
+module.exports = app; 

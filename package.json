@@ -2,9 +2,9 @@
   "name": "banglascript-compiler",
   "version": "1.0.0",
   "description": "A complete BanglaScript programming language compiler demonstrating all phases of language compilation",
-  "main": "src/compiler.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node src/compiler.js",
+    "start": "node server.js",
     "test": "node test_banglascript.js",
     "demo": "node src/demo.js",
     "web": "node server.js"
